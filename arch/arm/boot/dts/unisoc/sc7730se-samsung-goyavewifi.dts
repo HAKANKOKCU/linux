@@ -1,0 +1,45 @@
+/dts-v1/;
+
+#include "sc7730se.dtsi"
+
+/ {
+	compatible = "samsung,goyavewifi", "sprd,sc7730se";
+	model = "Samsung Galaxy Tab 3 Lite";
+
+	sprd,sc-id = <8830 4 0x20000>;
+
+	chosen {
+		bootargs = "earlycon=sprd_serial,0x70000000";
+
+		#address-cells = <2>;
+		#size-cells = <2>;
+	};
+
+	aliases {
+		serial0 = &uart0;
+		serial1 = &uart1;
+		serial2 = &uart2;
+		serial3 = &uart3;
+	};
+
+	memory@80000000 {
+		device_type = "memory";
+		reg = <0 0x80000000 0 0x40000000>;
+	};
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&uart1 {
+	status = "okay";
+};
+
+&uart2 {
+	status = "okay";
+};
+
+&uart3 {
+	status = "okay";
+};

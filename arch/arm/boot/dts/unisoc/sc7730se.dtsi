@@ -44,6 +44,12 @@
 		#size-cells = <2>;
 		ranges;
 
+		timer@40230000 {
+			compatible = "sprd,scx35-timer";
+			reg = <0 0x40050000 0 0x1000>;
+			interrupts = <GIC_SPI 28 IRQ_TYPE_LEVEL_HIGH>;
+		};
+
 		ap-apb {
 			compatible = "simple-bus";
 			#address-cells = <2>;
@@ -53,7 +59,7 @@
 			uart0: serial@70000000 {
 				compatible = "sprd,sc9836-uart";
 				reg = <0 0x70000000 0 0x1000>;
-				interrupts = <0 2 0xf04>;
+				interrupts = <GIC_SPI 2 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clk26mhz>;
 				status = "disabled";
 			};
@@ -61,7 +67,7 @@
 			uart1: serial@70100000 {
 				compatible = "sprd,sc9836-uart";
 				reg = <0 0x70100000 0 0x1000>;
-				interrupts = <0 3 0xf04>;
+				interrupts = <GIC_SPI 3 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clk26mhz>;
 				status = "disabled";
 			};
@@ -69,7 +75,7 @@
 			uart2: serial@70200000 {
 				compatible = "sprd,sc9836-uart";
 				reg = <0 0x70200000 0 0x1000>;
-				interrupts = <0 4 0xf04>;
+				interrupts = <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clk26mhz>;
 				status = "disabled";
 			};
@@ -77,21 +83,18 @@
 			uart3: serial@70300000 {
 				compatible = "sprd,sc9836-uart";
 				reg = <0 0x70300000 0 0x1000>;
-				interrupts = <0 5 0xf04>;
+				interrupts = <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
 				clocks = <&clk26mhz>;
 				status = "disabled";
 			};
 		};
 
 		gic: interrupt-controller@12001000 {
-			compatible = "arm,gic-400";
+			compatible = "arm,cortex-a7-gic";
 			reg = <0 0x12001000 0 0x1000>,
-			<0 0x12002000 0 0x2000>,
-			<0 0x12004000 0 0x2000>,
-			<0 0x12006000 0 0x2000>;
+			      <0 0x12002000 0 0x1000>;
 			#interrupt-cells = <3>;
 			interrupt-controller;
-			interrupts = <GIC_PPI 9 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
 		};
 	};
 
